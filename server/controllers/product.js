@@ -4,6 +4,8 @@ const Products = require("../models/products");
 const ErrorHandlerClass = require("../utils/error");
 // Reuire Async Handler Middleware
 const AsyncHandlerMiddleware = require("../middleware/async");
+// Reuire Product Feature Class
+const ProductFeatureClass = require("../utils/products");
 //@description Create Product
 //@route Create /api/vi/product
 //@access private
@@ -25,7 +27,8 @@ const createProduct = AsyncHandlerMiddleware(async (request, response, next) => 
 //@route Get /api/vi/products
 //@access public
 const getProducts = AsyncHandlerMiddleware(async (request, response, next) => {
-    const product = await Products.find();
+    const productFeatureClass = new ProductFeatureClass(Products.find(), request.query).search().filter().pagination(5);
+    const product = await productFeatureClass.query;
     response.status(200).json({
         success: true,
         data: product
