@@ -24,11 +24,11 @@ const schema = new mongoose.Schema({
         {
             publicID: {
                 type: String,
-                required: [true, "Please enter product Image public ID"],
+                required: [true, "Please enter Product image public ID"],
             },
             publicURL: {
                 type: String,
-                required: [true, "Please enter product Image public URL"],
+                required: [true, "Please enter Product image public URL"],
             }
         }
     ],

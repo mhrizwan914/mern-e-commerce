@@ -28,9 +28,11 @@ const createProduct = AsyncHandlerMiddleware(async (request, response, next) => 
 //@access public
 const getProducts = AsyncHandlerMiddleware(async (request, response, next) => {
     const productFeatureClass = new ProductFeatureClass(Products.find(), request.query).search().filter().pagination(5);
+    const counts = await Products.countDocuments();
     const product = await productFeatureClass.query;
     response.status(200).json({
         success: true,
+        counts,
         data: product
     });
 });
@@ -80,7 +82,5 @@ const deleteProduct = AsyncHandlerMiddleware(async (request, response, next) => 
         message: "Product deleted successfully"
     });
 })
-
-
 // Export
 module.exports = { createProduct, getProducts, getProduct, updateProduct, deleteProduct };

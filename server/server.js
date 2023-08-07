@@ -16,6 +16,8 @@ process.on("uncaughtException", (error) => {
 app.use(express.json());
 // Require Products Route
 app.use("/api/v1", require("./routes/product"));
+// Require Users Route
+app.use("/api/v1/user", require("./routes/user"));
 // Error Handler Middleware
 app.use(ErrorHandlerMiddleware);
 // Create Port Variable

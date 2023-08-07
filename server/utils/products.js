@@ -32,10 +32,11 @@ class ProductFeatureClass {
         return this;
     }
     // Pagonation
-    pagination(e){
-        // console.log(e);
-        // const currentPage = 
-        // return this;
+    pagination(perPage) {
+        const currentPage = Number(this.string.page) || 1;
+        const skipPage = perPage * (currentPage - 1);
+        this.query = this.query.limit(perPage).skip(skipPage).sort({ createdAt: -1 });
+        return this;
     }
 }
 // Export 
