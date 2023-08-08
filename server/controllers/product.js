@@ -1,6 +1,6 @@
 // Require Products Model
 const Products = require("../models/products");
-// Reuire Error Handler
+// Reuire Error Handler Class
 const ErrorHandlerClass = require("../utils/error");
 // Reuire Async Handler Middleware
 const AsyncHandlerMiddleware = require("../middleware/async");

@@ -2,6 +2,10 @@
 const mongoose = require("mongoose");
 // Require Email Validator
 const { isEmail } = require("validator");
+// Require Bcryptjs 
+const bcryptjs = require("bcryptjs");
+// Require JWT Token
+const jwt = require("jsonwebtoken");
 // Create Schema
 const schema = new mongoose.Schema({
     name: {
@@ -43,5 +47,22 @@ const schema = new mongoose.Schema({
         default: Date.now()
     }
 });
-// Export Model
+// Handle Before Save Schema 
+schema.pre("save", async function (next) {
+    if (!this.isModified("password")) {
+        return next();
+    }
+    this.password = await bcryptjs.hash(this.password, 10);
+});
+// Generate JWT Access Token
+schema.methods.generateAccessToken = function () {
+    return jwt.sign({ id: this._id }, process.env.JWT_SECRET_KEY, {
+        expiresIn: process.env.JWT_EXPIRE_TIME
+    });
+}
+// Match Password
+schema.methods.matchPassword = async function (e) {
+    return await bcryptjs.compare(e, this.password);
+}
+// Export
 module.exports = mongoose.model("user", schema);

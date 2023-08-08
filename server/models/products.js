@@ -66,5 +66,5 @@ const schema = new mongoose.Schema({
         default: Date.now()
     }
 });
-// Export Model
+// Export
 module.exports = mongoose.model("product", schema);

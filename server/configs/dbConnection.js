@@ -17,5 +17,5 @@ const dbConnectionHandle = async () => {
     //     process.exit(1);
     // }
 }
-// Export Connection
+// Export
 module.exports = { dbConnectionHandle };
