@@ -1,7 +1,11 @@
 // Require Express
 const express = require("express");
+// Require DatabaseConnection
 const { dbConnectionHandle } = require("./configs/dbConnection");
+// Require Error Handler Middleware
 const ErrorHandlerMiddleware = require("./middleware/error");
+// Require Cookie Parser
+const cookieParser = require("cookie-parser");
 // Create Express App
 const app = express();
 // Config dotenv
@@ -14,6 +18,8 @@ process.on("uncaughtException", (error) => {
 });
 // Data Handling Middleware
 app.use(express.json());
+// Cookie Handing Middleware
+app.use(cookieParser());
 // Require Products Route
 app.use("/api/v1", require("./routes/product"));
 // Require Users Route
