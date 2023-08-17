@@ -34,7 +34,6 @@ const loginUSer = AsyncHandlerMiddleware(async (request, response, next) => {
     if (!user) {
         return next(new ErrorHandlerClass(401, "Invalid Email and Password"));
     }
-    console.log(user);
     const isPasswordMatch = await user.matchPassword(password);
     if (!isPasswordMatch) {
         return next(new ErrorHandlerClass(401, "Invalid Email and Password"));

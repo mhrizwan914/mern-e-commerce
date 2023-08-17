@@ -18,7 +18,7 @@ process.on("uncaughtException", (error) => {
 });
 // Data Handling Middleware
 app.use(express.json());
-// Cookie Handing Middleware
+// Cookie Parser Middleware
 app.use(cookieParser());
 // Require Products Route
 app.use("/api/v1", require("./routes/product"));
